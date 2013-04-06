@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  <appender name="X" class="org.apache.log4j.ConsoleAppender">
+	<param name="Target" value="System.out"/> 
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="log4jxml %t [%p] %c{1} - %m%n "/> 
+    </layout> 
+  </appender> 
+	<!--  I do not suggest using log4j.properties
+		  I had issues with it, could be due to my 
+		  i_log4log4j wrapper but didn't try to determine
+		  
+	 -->
+
+  <logger name="org.adligo.i.pool.ldap.LdapConnectionsTest" additivity="false">
+      <level value="DEBUG"/>
+      <appender-ref ref="X"/>
+  </logger>
+  
+  <root>
+    <priority value="WARN"/>
+    <appender-ref ref="X" />
+  </root>
+</log4j:configuration>
