@@ -11,7 +11,7 @@ public class MockPool {
 		 LdapConnectionFactoryConfig config = new LdapConnectionFactoryConfig();
 	      config.setPort(InMemoryApacheDs.PORT);
 	      config.setHost("localhost");
-	      
+	      config.setDefaultChunkSize(10);
 	      PoolConfiguration<ReadWriteLdapConnection> poolConfig = new PoolConfiguration<ReadWriteLdapConnection>();
 	      poolConfig.setFactory(new ReadWriteLdapConnectionFactory(config));
 	      poolConfig.setMax(2);
