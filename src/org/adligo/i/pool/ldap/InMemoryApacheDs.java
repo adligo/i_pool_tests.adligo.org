@@ -2,8 +2,18 @@ package org.adligo.i.pool.ldap;
 
 import java.io.File;
 import java.net.URI;
+import java.util.Hashtable;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.directory.BasicAttribute;
+import javax.naming.directory.BasicAttributes;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
+
+import org.adligo.i.pool.ldap.models.JavaToLdapConverters;
+import org.adligo.i.pool.ldap.models.LdapConnectionFactoryConfig;
 import org.adligo.tests.ATest;
 import org.apache.directory.api.ldap.model.name.Dn;
 import org.apache.directory.api.ldap.model.schema.registries.Schema;
@@ -30,6 +40,10 @@ import org.junit.BeforeClass;
  * Note ATest extension just does the i_log/jse_util init for me
  */
 public class InMemoryApacheDs extends ATest {
+		public static final String DC = "dc";
+		private static final String TEST_DC = "test";
+		public static final String TEST_BASE_DN = "dc=test";
+		public static final int PORT = 11389;
 		private static final Logger log = Logger.getLogger(InMemoryApacheDs.class);
 	  private static DirectoryService directoryService;
 	  private static LdapServer ldapServer;
@@ -74,11 +88,16 @@ public class InMemoryApacheDs extends ATest {
 	    systemPartition.setSuffixDn(new Dn(ServerDNConstants.SYSTEM_DN));
 	    directoryService.setSystemPartition(systemPartition);
 
+	    AvlPartition testPartition = new AvlPartition(schemaManager);
+	    testPartition.setId(TEST_DC);
+	    testPartition.setSuffixDn(new Dn(TEST_BASE_DN));
+	    directoryService.addPartition(testPartition);
+	    
 	    directoryService.setShutdownHookEnabled(false);
 	    directoryService.getChangeLog().setEnabled(false);
 
 	    ldapServer = new LdapServer();
-	    ldapServer.setTransports(new TcpTransport(11389));
+	    ldapServer.setTransports(new TcpTransport(PORT));
 	    ldapServer.setDirectoryService(directoryService);
 
 	    
@@ -103,7 +122,26 @@ public class InMemoryApacheDs extends ATest {
 	    directoryService.setCacheService(cs);
 	    directoryService.startup();
 	    ldapServer.start();
+	    
+	    createTestEntry();
 	  }
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static void createTestEntry() throws NamingException {
+		Hashtable env = new Hashtable();
+		      env.put(Context.INITIAL_CONTEXT_FACTORY,
+		         "com.sun.jndi.ldap.LdapCtxFactory");
+		      env.put(Context.PROVIDER_URL,
+		         "ldap://localhost:" + PORT);
+	    DirContext ctx = new InitialDirContext(env);
+	    BasicAttributes attribs = new BasicAttributes();
+		BasicAttribute ba = new BasicAttribute(DC, TEST_DC);
+		attribs.put(ba);
+		ba = new BasicAttribute("objectClass", "domain");
+		attribs.put(ba);
+	    ctx.createSubcontext(TEST_BASE_DN, attribs);
+	    ctx.close();
+	}
 
 	  @AfterClass
 	  public static void stopApacheDs() throws Exception {
