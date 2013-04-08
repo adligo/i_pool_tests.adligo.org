@@ -8,6 +8,7 @@ import org.adligo.i.log.client.Log;
 import org.adligo.i.log.client.LogFactory;
 import org.adligo.i.pool.ldap.models.CommonAttributes;
 import org.adligo.i.pool.ldap.models.I_LdapEntry;
+import org.adligo.i.pool.ldap.models.LargeFileCreationToken;
 import org.adligo.i.pool.ldap.models.LdapEntryMutant;
 import org.adligo.tests.ATest;
 import org.apache.directory.api.ldap.model.schema.registries.Schema;
@@ -61,8 +62,8 @@ public class LdapConnectionsTest extends ATest {
 
 	      assertNotNull(InMemoryApacheDs.TEST_BASE_DN);
 	      assertEquals(InMemoryApacheDs.TEST_BASE_DN, entry.getDistinguishedName());
-	      assertEquals("test", entry.getAttribute(InMemoryApacheDs.DC));
-	      List<String> attribs = entry.getStringAttributes("objectClass");
+	      assertEquals("test", entry.getAttribute(CommonAttributes.DC));
+	      List<String> attribs = entry.getStringAttributes(CommonAttributes.OBJECT_CLASS);
 	      assertTrue(attribs.contains("top"));
 	      assertTrue(attribs.contains("domain"));
 	}
@@ -72,7 +73,7 @@ public class LdapConnectionsTest extends ATest {
 	      
 	      LdapEntryMutant lem = new LdapEntryMutant();
 	      lem.setDistinguishedName(dn);
-	      lem.setAttribute("dc", "testCreate");
+	      lem.setAttribute(CommonAttributes.DC, "testCreate");
 	      lem.setAttribute(CommonAttributes.OBJECT_CLASS, "domain");
 	      ldapCon.create(lem);
 	      
@@ -80,8 +81,8 @@ public class LdapConnectionsTest extends ATest {
 
 	      assertNotNull(InMemoryApacheDs.TEST_BASE_DN);
 	      assertEquals(dn, entry.getDistinguishedName());
-	      assertEquals("testCreate", entry.getAttribute(InMemoryApacheDs.DC));
-	      List<String> attribs = entry.getStringAttributes("objectClass");
+	      assertEquals("testCreate", entry.getAttribute(CommonAttributes.DC));
+	      List<String> attribs = entry.getStringAttributes(CommonAttributes.OBJECT_CLASS);
 	      assertTrue(attribs.contains("top"));
 	      assertTrue(attribs.contains("domain"));
 	      
@@ -90,8 +91,13 @@ public class LdapConnectionsTest extends ATest {
 	public void testCreateLargeFile() throws Exception {
 	      InputStream in = getClass().getResourceAsStream("/org/adligo/i/pool/ldap/test.file");
 	      
-	      
-	     assertTrue(ldapCon.createLargeFile("test.file", InMemoryApacheDs.TEST_BASE_DN, 37, in));
+	      LargeFileCreationToken token = new LargeFileCreationToken();
+	      token.setBaseDn(InMemoryApacheDs.TEST_BASE_DN);
+	      token.setFileName("test.file");
+	      token.setContentStream(in);
+	      token.setSize(37);
+	      token.setServerCheckedOn("inMemoryServer");
+	     assertTrue(ldapCon.createLargeFile(token));
 
 	      assertNotNull(InMemoryApacheDs.TEST_BASE_DN);
 	      /*

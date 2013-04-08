@@ -59,9 +59,7 @@ public class InMemoryApacheDs {
 	  private static int TEST_COUNT = 0;
 	  
 	  public static DefaultSchemaManager createDefaultSchemaManager() throws Exception {
-		    String buildDirectory = System.getProperty("buildDirectory");
-		    File workingDirectory = new File(buildDirectory, "apacheds-work");
-		    workingDirectory.mkdir();
+
 
 		    
 		    directoryService = new DefaultDirectoryService();

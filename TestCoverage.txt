@@ -3,3 +3,7 @@ Date,Package,Coverage,Instructions
 4/4/2013,org.adligo.i.pool.ldap,0.0%,1186
 4/4/2013,org.adligo.i.pool.ldap.models,0.0%,1423
 4/4/2013,org.adligo.i.pool.ldap.models.converters,29.5%,237
+4/8/2013,org.adligo.i.pool,51.0%,533
+4/8/2013,org.adligo.i.pool.ldap,40.8%,1273
+4/8/2013,org.adligo.i.pool.ldap.models,46.7%,1869
+4/8/2013,org.adligo.i.pool.ldap.models.converters,100.0%,238
