@@ -49,14 +49,13 @@ import org.junit.BeforeClass;
 public class InMemoryApacheDs {
 		public static final String DC = "dc";
 		private static final String TEST_DC = "test";
-		public static final String TEST_BASE_DN = "dc=test";
+		public static final String BASE_TEST_DN = "dc=test";
 		public static final int PORT = 11389;
 		private static final Logger log = Logger.getLogger(InMemoryApacheDs.class);
 	  private static DirectoryService directoryService;
 	  private static LdapServer ldapServer;
 	  private static AvlPartition testPartition;
 	  private static InstanceLayout instanceLayout;
-	  private static int TEST_COUNT = 0;
 	  
 	  public static DefaultSchemaManager createDefaultSchemaManager() throws Exception {
 
@@ -101,7 +100,7 @@ public class InMemoryApacheDs {
 	    
 		  testPartition = new AvlPartition(schemaManager);
 		    testPartition.setId(TEST_DC);
-		    testPartition.setSuffixDn(new Dn(TEST_BASE_DN));
+		    testPartition.setSuffixDn(new Dn(BASE_TEST_DN));
 		    directoryService.addPartition(testPartition);
 		    
 		  schemaManager.loadAllEnabled();
@@ -147,7 +146,7 @@ public class InMemoryApacheDs {
 		attribs.put(ba);
 		ba = new BasicAttribute("objectClass", "domain");
 		attribs.put(ba);
-	    ctx.createSubcontext(TEST_BASE_DN, attribs);
+	    ctx.createSubcontext(BASE_TEST_DN, attribs);
 	    ctx.close();
 	}
 

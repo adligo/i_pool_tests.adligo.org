@@ -14,5 +14,7 @@
 	<classpathentry kind="var" path="MVN_REPO/org/slf4j/slf4j-log4j12/1.7.5/slf4j-log4j12-1.7.5.jar"/>
 	<classpathentry kind="var" path="MVN_REPO/org/slf4j/slf4j-api/1.7.5/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="var" path="MVN_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/adi_tests"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/adig_tests"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
