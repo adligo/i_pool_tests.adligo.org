@@ -188,9 +188,6 @@ public class InMemoryApacheDs {
 			    			    break;
 			    		case ATTRIBUTE_TYPE:
 			    			atr.register((AttributeType) so);	
-			    			schemaManager.add(so);
-			    				//atr.register((AttributeType) so);
-			    				
 			    			break;
 		    		}
 		    	}
