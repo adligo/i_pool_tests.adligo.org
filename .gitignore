@@ -3,4 +3,5 @@ classes/
 eldap_dir/
 classes_e/
 bin/
+*.swp
 test_failure.properties
