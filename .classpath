@@ -12,5 +12,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/adi_tests"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/adig_tests"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/models_core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

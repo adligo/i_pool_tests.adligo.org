@@ -1,0 +1,6 @@
+test_output/
+classes/
+eldap_dir/
+classes_e/
+bin/
+test_failure.properties
