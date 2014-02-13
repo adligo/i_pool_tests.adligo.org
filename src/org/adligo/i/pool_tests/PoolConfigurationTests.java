@@ -1,6 +1,7 @@
-package org.adligo.i.pool;
+package org.adligo.i.pool_tests;
 
-import org.adligo.i.pool.mocks.MockPoolCon;
+import org.adligo.i.pool.PoolConfigurationMutant;
+import org.adligo.i.pool_tests.mocks.MockPoolCon;
 import org.adligo.tests.ATest;
 
 public class PoolConfigurationTests extends ATest {

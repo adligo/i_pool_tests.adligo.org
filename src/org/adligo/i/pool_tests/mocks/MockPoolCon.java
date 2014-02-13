@@ -1,4 +1,4 @@
-package org.adligo.i.pool.mocks;
+package org.adligo.i.pool_tests.mocks;
 
 import org.adligo.i.pool.I_PooledConnection;
 
