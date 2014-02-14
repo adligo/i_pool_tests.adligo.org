@@ -5,3 +5,6 @@ classes_e/
 bin/
 *.swp
 test_failure.properties
+test_reports/
+i_pool_tests*.jar
+
