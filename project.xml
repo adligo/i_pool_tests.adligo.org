@@ -16,6 +16,7 @@
         <lns:project>i_util_tests.adligo.org</lns:project>
         <lns:project>jse_util.adligo.org</lns:project>
         <lns:project>models_core.adligo.org</lns:project>
+        <lns:project>i_pool.adligo.org</lns:project>
         <lns:project>tests.adligo.org</lns:project>
     </lns:dependencies>
  </tns:fabricate_project>
