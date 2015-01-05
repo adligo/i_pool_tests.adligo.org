@@ -1,11 +1,11 @@
-test_output/
+/test_output/
 /build/
-classes/
-eldap_dir/
-classes_e/
-bin/
+/classes/
+/eldap_dir/
+/classes_e/
+/bin/
 *.swp
 test_failure.properties
-test_reports/
+/test_reports/
 i_pool_tests*.jar
 
